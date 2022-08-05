@@ -8,15 +8,10 @@ resource "azurerm_storage_account" "databricks-storageacc" {
   is_hns_enabled           = "true"
 }
 
-# resource "azurerm_storage_data_lake_gen2_filesystem" "TaxiRides" {
-#   name               = "taxirides"
-#   storage_account_id = azurerm_storage_account.databricks-storageacc.id
-# }
-
-# resource "azurerm_storage_data_lake_gen2_filesystem" "StockMarket" {
-#   name               = "stockmarket"
-#   storage_account_id = azurerm_storage_account.databricks-storageacc.id
-# }
+resource "azurerm_storage_data_lake_gen2_filesystem" "Commonfiles" {
+  name               = "commonfiles-${var.env}"
+  storage_account_id = azurerm_storage_account.databricks-storageacc.id
+}
 
 # #A global sas token for the above sa
 # data "azurerm_storage_account_sas" "databricks-tutorials-globaltoken" {
