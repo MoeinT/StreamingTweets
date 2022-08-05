@@ -8,6 +8,11 @@ terraform {
     databricks = {
       source = "databricks/databricks"
     }
+
+    github = {
+      source  = "hashicorp/github"
+      version = "~> 4.0"
+    }
   }
 
   backend "azurerm" {
@@ -23,6 +28,10 @@ data "azurerm_client_config" "current" {
 
 provider "azurerm" {
   features {}
+}
+
+provider "github" {
+  token = var.github_token
 }
 
 

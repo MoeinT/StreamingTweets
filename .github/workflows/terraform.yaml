@@ -1,0 +1,73 @@
+name: 'Terraform'
+
+on: [push, pull_request]
+
+env:
+  TF_LOG: INFO
+
+jobs:
+  Terraform-Dev-Prod:
+    name: 'Terraform Actions'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./tf
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.1.9
+    - name: Initializing the Dev backend
+      id: init
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      if: github.ref != 'refs/heads/main'
+      run: terraform init -backend-config backend/dev.tfvars
+    - name: Validating terraform
+      run: terraform validate
+    - name: Checking the format
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Apply on Dev
+      id: plan
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        TF_VAR_github_token: ${{ secrets.ARM_GITHUB_TOKEN }}
+        TF_VAR_moein_obj_id: ${{ secrets.ARM_USER_OBJ_ID }}
+      if: github.event_name == 'pull_request'
+      run: terraform apply -auto-approve -var-file vars/dev.tfvars
+
+    # The infrastructure gets deployed only when the pr is closed and merged to main
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    - name: Initializing the Prod backend
+      id: init
+      env:
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      run: terraform init -backend-config backend/prod.tfvars
+    - name: Terraform apply on Prod
+      env: 
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        TF_VAR_github_token: ${{ secrets.ARM_GITHUB_TOKEN }}
+        TF_VAR_moein_obj_id: ${{ secrets.ARM_USER_OBJ_ID }}
+        # ARM_USER_OBJ_ID: ${{ secrets.ARM_USER_OBJ_ID }}
+        # ARM_DATABRICKS_ACCESS_TOKEN: ${{ secrets.ARM_DATABRICKS_ACCESS_TOKEN }}
+        # ARM_DATABRICKS_object_id: ${{ secrets.ARM_DATABRICKS_object_id }}
+        # ARM_SQL_PASSWORD: ${{ secrets.ARM_SQL_PASSWORD }}
+        # ARM_USER_OBJ_ID: ${{ secrets.ARM_USER_OBJ_ID }}
+      run: terraform apply -auto-approve -var-file vars/prod.tfvars
