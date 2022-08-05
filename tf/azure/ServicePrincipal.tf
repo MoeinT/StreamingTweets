@@ -1,3 +1,4 @@
+#Service principal for Github Actions
 resource "azuread_application" "terraform-github" {
   display_name = "Terraform-Github"
   owners       = [var.moein_obj_id]
