@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "databricks-storageacc" {
-  name                     = "EventHubs-sa-${var.env}"
+  name                     = "eventhubs-sa-${var.env}"
   resource_group_name      = azurerm_resource_group.TerraformingAzureRg.name
   location                 = azurerm_resource_group.TerraformingAzureRg.location
   account_tier             = "Standard"
