@@ -34,6 +34,8 @@ provider "github" {
   token = var.github_token
 }
 
+provider "databricks" {
+}
 
 resource "azurerm_resource_group" "tfstate" {
   name     = "tfstate-rg"
