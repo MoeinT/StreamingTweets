@@ -65,7 +65,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2
     - name: Initializing the Prod backend
       id: init 
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      if: github.event_name == 'pull_request'
       run: terraform init -backend-config backend/prod.tfvars
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
