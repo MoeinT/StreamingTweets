@@ -10,16 +10,16 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
 #We need to reference an existing workspace in our Databricks provider
 provider "databricks" {
   host = azurerm_databricks_workspace.databricks-ws.workspace_url
-  # azure_auth = {
-  #   managed_resource_group = azurerm_databricks_workspace.databricks-ws.managed_resource_group_name
-  #   azure_region           = azurerm_databricks_workspace.dbks.location
-  #   workspace_name         = azurerm_databricks_workspace.dbks.name
-  #   resource_group         = azurerm_databricks_workspace.dbks.resource_group_name
-  #   client_id              = azuread_application.aadapp.application_id
-  #   client_secret          = random_password.aadapp_secret.result
-  #   tenant_id              = data.azurerm_client_config.current.tenant_id
-  #   subscription_id        = data.azurerm_client_config.current.subscription_id
-  # }
+  azure_auth = {
+    managed_resource_group = azurerm_databricks_workspace.databricks-ws.managed_resource_group_name
+    azure_region           = azurerm_databricks_workspace.databricks-ws.location
+    workspace_name         = azurerm_databricks_workspace.databricks-ws.name
+    resource_group         = azurerm_databricks_workspace.databricks-ws.resource_group_name
+    client_id              = azuread_application.terraform-github.application_id
+    client_secret          = azuread_application_password.Github-actions.value
+    tenant_id              = data.azurerm_client_config.current.tenant_id
+    subscription_id        = data.azurerm_subscription.current.subscription_id
+  }
 }
 
 # resource "databricks_cluster" "SingleNodeCluster" {
