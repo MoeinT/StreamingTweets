@@ -34,9 +34,9 @@ resource "databricks_cluster" "SingleNodeCluster" {
 }
 
 # #Install the maven library for Azure EventHub
-# resource "databricks_library" "maven-EventHub" {
-#   cluster_id = databricks_cluster.SingleNodeCluster.id
-#   maven {
-#     coordinates = "com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.22"
-#   }
-# }
+resource "databricks_library" "maven-EventHub" {
+  cluster_id = databricks_cluster.SingleNodeCluster.id
+  maven {
+    coordinates = "com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.22"
+  }
+}
