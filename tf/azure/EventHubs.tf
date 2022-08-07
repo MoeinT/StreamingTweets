@@ -16,12 +16,12 @@ resource "azurerm_eventhub" "AllEventHubs" {
   message_retention   = 1
 }
 
-# resource "azurerm_eventhub_namespace_authorization_rule" "TaxiSourceAccessPolicy" {
-#   name                = "RootManageSharedAccessKey"
-#   namespace_name      = azurerm_eventhub_namespace.TaxiSourceEventHubsNamespace.name
-#   resource_group_name = azurerm_resource_group.TerraformingAzureRg.name
+resource "azurerm_eventhub_namespace_authorization_rule" "EventHubsNamespacePolicy" {
+  name                = "RootManageSharedAccessKey"
+  namespace_name      = azurerm_eventhub_namespace.TaxiSourceEventHubsNamespace.name
+  resource_group_name = azurerm_resource_group.TerraformingAzureRg.name
 
-#   listen = true
-#   send   = true
-#   manage = true
-# }
+  listen = true
+  send   = true
+  manage = true
+}
