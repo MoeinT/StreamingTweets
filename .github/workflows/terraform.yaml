@@ -9,7 +9,7 @@ jobs:
   Terraform-Dev:
     name: 'Terraform on Dev'
     runs-on: ubuntu-latest
-    environment: production
+    environment: Dev
     defaults:
       run:
         shell: bash
@@ -53,6 +53,7 @@ jobs:
   Terraform-Prod:
     name: 'Terraform on Prod'
     runs-on: ubuntu-latest
+    environment: Prod
     needs: Terraform-Dev
     defaults:
       run:
