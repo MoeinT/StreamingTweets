@@ -4,9 +4,7 @@ terraform {
       source = "databricks/databricks"
     }
   }
-
 }
-
 
 data "azurerm_client_config" "current" {}
 
@@ -15,7 +13,6 @@ data "azurerm_subscription" "current" {}
 provider "azurerm" {
   features {}
 }
-
 
 resource "azurerm_resource_group" "TerraformingAzureRg" {
   name     = "StreamingData-rg-${var.env}"
