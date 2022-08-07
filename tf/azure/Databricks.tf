@@ -2,7 +2,7 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
   name                          = "db-streaming-ws-${var.env}"
   resource_group_name           = azurerm_resource_group.TerraformingAzureRg.name
   location                      = azurerm_resource_group.TerraformingAzureRg.location
-  managed_resource_group_name   = "db-managed-rg"
+  managed_resource_group_name   = "db-managed-rg-${var.env}"
   sku                           = "premium"
   public_network_access_enabled = true
 }
