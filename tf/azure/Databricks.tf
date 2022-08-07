@@ -9,35 +9,29 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
 
 #We need to reference an existing workspace in our Databricks provider
 provider "databricks" {
-  host = azurerm_databricks_workspace.databricks-ws.workspace_url
-  azure_auth = {
-    managed_resource_group = azurerm_databricks_workspace.databricks-ws.managed_resource_group_name
-    azure_region           = azurerm_databricks_workspace.databricks-ws.location
-    workspace_name         = azurerm_databricks_workspace.databricks-ws.name
-    resource_group         = azurerm_databricks_workspace.databricks-ws.resource_group_name
-    client_id              = azuread_application.terraform-github.application_id
-    client_secret          = azuread_application_password.Github-actions.value
-    tenant_id              = data.azurerm_client_config.current.tenant_id
-    subscription_id        = data.azurerm_subscription.current.subscription_id
-  }
+  host                        = azurerm_databricks_workspace.databricks-ws.workspace_url
+  azure_workspace_resource_id = azurerm_databricks_workspace.databricks-ws.id
+  azure_client_id             = azuread_application.terraform-github.application_id
+  azure_client_secret         = azuread_application_password.Github-actions.value
+  azure_tenant_id             = data.azurerm_client_config.current.tenant_id
 }
 
-# resource "databricks_cluster" "SingleNodeCluster" {
-#   cluster_name            = "db-sn-cluster-${var.env}"
-#   spark_version           = "7.3.x-scala2.12"
-#   node_type_id            = "Standard_DS3_v2"
-#   autotermination_minutes = 20
-#   num_workers             = 0
+resource "databricks_cluster" "SingleNodeCluster" {
+  cluster_name            = "db-sn-cluster-${var.env}"
+  spark_version           = "7.3.x-scala2.12"
+  node_type_id            = "Standard_DS3_v2"
+  autotermination_minutes = 20
+  num_workers             = 0
 
-#   spark_conf = {
-#     "spark.databricks.cluster.profile" : "singleNode"
-#     "spark.master" : "local[*]"
-#   }
+  spark_conf = {
+    "spark.databricks.cluster.profile" : "singleNode"
+    "spark.master" : "local[*]"
+  }
 
-#   custom_tags = {
-#     "ResourceClass" = "SingleNode"
-#   }
-# }
+  custom_tags = {
+    "ResourceClass" = "SingleNode"
+  }
+}
 
 # #Install the maven library for Azure EventHub
 # resource "databricks_library" "maven-EventHub" {
