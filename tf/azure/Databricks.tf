@@ -22,22 +22,22 @@ provider "databricks" {
   }
 }
 
-# resource "databricks_cluster" "SingleNodeCluster" {
-#   cluster_name            = "db-sn-cluster-${var.env}"
-#   spark_version           = "7.3.x-scala2.12"
-#   node_type_id            = "Standard_DS3_v2"
-#   autotermination_minutes = 20
-#   num_workers             = 0
+resource "databricks_cluster" "SingleNodeCluster" {
+  cluster_name            = "db-sn-cluster-${var.env}"
+  spark_version           = "7.3.x-scala2.12"
+  node_type_id            = "Standard_DS3_v2"
+  autotermination_minutes = 20
+  num_workers             = 0
 
-#   spark_conf = {
-#     "spark.databricks.cluster.profile" : "singleNode"
-#     "spark.master" : "local[*]"
-#   }
+  spark_conf = {
+    "spark.databricks.cluster.profile" : "singleNode"
+    "spark.master" : "local[*]"
+  }
 
-#   custom_tags = {
-#     "ResourceClass" = "SingleNode"
-#   }
-# }
+  custom_tags = {
+    "ResourceClass" = "SingleNode"
+  }
+}
 
 # #Install the maven library for Azure EventHub
 # resource "databricks_library" "maven-EventHub" {
