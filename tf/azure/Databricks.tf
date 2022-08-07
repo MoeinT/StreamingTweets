@@ -8,7 +8,7 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
 
 #We need to reference an existing workspace in our Databricks provider
 provider "databricks" {
-  host = azurerm_databricks_workspace.databricks-ws.workspace_url
+  host      = azurerm_databricks_workspace.databricks-ws.workspace_url
   auth_type = "pat"
 }
 
