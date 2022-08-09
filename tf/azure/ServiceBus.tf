@@ -1,6 +1,6 @@
-resource "azurerm_servicebus_namespace" "example" {
-  name                = "tfex-servicebus-namespace"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_servicebus_namespace" "ServiceBus" {
+  name                = "moein-servicebus-namespace-${var.env}"
+  location            = azurerm_resource_group.TerraformingAzureRg.location
+  resource_group_name = azurerm_resource_group.TerraformingAzureRg.name
   sku                 = "Basic"
 }
