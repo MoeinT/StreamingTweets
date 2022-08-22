@@ -1,3 +1,4 @@
+
 resource "azurerm_eventhub_namespace" "TaxiSourceEventHubsNamespace" {
   name                = "EventHub-ns-${var.env}"
   location            = azurerm_resource_group.TerraformingAzureRg.location
