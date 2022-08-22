@@ -46,7 +46,7 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         TF_VAR_github_token: ${{ secrets.ARM_GITHUB_TOKEN }}
         TF_VAR_moein_obj_id: ${{ secrets.ARM_USER_OBJ_ID }}
-      if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request
+      if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
       run: terraform plan -auto-approve -var-file vars/dev.tfvars
 
     - name: Terraform Apply on Dev
