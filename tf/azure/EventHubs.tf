@@ -26,3 +26,5 @@ resource "azurerm_eventhub_namespace_authorization_rule" "EventHubsNamespacePoli
   send   = true
   manage = true
 }
+
+#terraform import azurerm_eventhub_namespace_authorization_rule.example /subscriptions/1b7f4ea1-c952-4797-ab87-31c4b9078163/resourceGroups/StreamingData-rg-prod/providers/Microsoft.EventHub/namespaces/EventHub-ns-prod/authorizationRules/RootManageSharedAccessKey
