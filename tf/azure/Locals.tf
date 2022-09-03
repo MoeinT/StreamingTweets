@@ -13,6 +13,13 @@ locals {
       secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"]
       key_permissions     = ["Get", ]
       storage_permissions = ["Get", ]
+    },
+    {
+      tenant_id           = data.azurerm_client_config.current.tenant_id,
+      object_id           = "8d2c88a6-f811-4f9a-9d2a-c68280fc4c54",
+      secret_permissions  = ["Backup", "Delete", "Get", "List", "Purge", "Recover", "Restore", "Set"]
+      key_permissions     = ["Get", ]
+      storage_permissions = ["Get", ]
     }
   ]
 
