@@ -16,3 +16,8 @@ variable "github_token" {
   type      = string
   sensitive = true
 }
+
+variable "db_objid" {
+  type      = string
+  sensitive = true
+}
