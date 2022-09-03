@@ -9,7 +9,7 @@ resource "azurerm_eventhub_namespace" "TaxiSourceEventHubsNamespace" {
 
 #All the Eventhubs
 resource "azurerm_eventhub" "AllEventHubs" {
-  for_each            = toset(["RideStartEventhub-${var.env}", "RideEndEventhub-${var.env}", "AnamoliesEventHubs-${var.env}", "StockDataEventHubs-${var.env}"])
+  for_each            = toset(["StreamingTweets-${var.env}"])
   name                = each.key
   namespace_name      = azurerm_eventhub_namespace.TaxiSourceEventHubsNamespace.name
   resource_group_name = azurerm_resource_group.TerraformingAzureRg.name
