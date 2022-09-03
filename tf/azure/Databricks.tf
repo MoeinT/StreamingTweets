@@ -40,3 +40,13 @@ resource "databricks_library" "maven-EventHub" {
     coordinates = "com.microsoft.azure:azure-eventhubs-spark_2.12:2.3.22"
   }
 }
+
+resource "databricks_notebook" "AllNotebooks" {
+  for_each = {
+    TweetStreaming = { source : "../scripts/databricks/StreamingTweets.py", path : "/Eventhubs/StreamingTweets" },
+    MountDatalake  = { source : "../scripts/databricks/MountDatalake.py", path : "/Eventhubs/MountDatalake" }
+  }
+
+  source = each.value.source
+  path   = each.value.path
+}
