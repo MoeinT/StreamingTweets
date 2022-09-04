@@ -7,3 +7,7 @@ Ingested tweets into an Event Grid topic in Azure on a real-time basis; subscrib
 # Cloud Architecture
 
 ![plot](./assets/Architecture.png)
+
+<p align="center">
+  <img width="460" height="300" src=./assets/Architecture.png>
+</p>
