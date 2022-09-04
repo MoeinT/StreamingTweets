@@ -11,6 +11,7 @@ Ingested tweets into an Event Grid topic in Azure on a real-time basis; subscrib
 - Processed the incoming streams using Databricks Structured Streaming
 - Stored the processed streams into Databricks Delta Table, a next generation storage solution in the cloud
 
+
 <p align="center">
   <img width="600" height="170" src=./assets/Architecture.png>
 </p>
