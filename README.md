@@ -9,5 +9,5 @@ Ingested tweets into an Event Grid topic in Azure on a real-time basis; subscrib
 ![plot](./assets/Architecture.png)
 
 <p align="center">
-  <img width="1000" height="100" src=./assets/Architecture.png>
+  <img width="800" height="150" src=./assets/Architecture.png>
 </p>
