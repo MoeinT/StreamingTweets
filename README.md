@@ -15,3 +15,7 @@ This project shows how we can manage the flow of data on a real-time basis into 
 <p align="center">
   <img width="600" height="170" src=./assets/Architecture.png>
 </p>
+
+# Contact
+- moin.torabi@gmail.com
+- (LinkedIn)[https://www.linkedin.com/in/moein-torabi-5339b288/]
