@@ -18,4 +18,4 @@ This project shows how we can manage the flow of data on a real-time basis into 
 
 # Contact
 - moin.torabi@gmail.com
-- (LinkedIn)[https://www.linkedin.com/in/moein-torabi-5339b288/]
+- [LinkedIn](https://www.linkedin.com/in/moein-torabi-5339b288/)
