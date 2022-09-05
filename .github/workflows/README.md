@@ -10,4 +10,4 @@ Figure above shows how the Terraform pipeline has been designed; here are the st
 
 - Once the development environment has been initialized and the configuration files have been validated, a pull request will trigger the next stage. Our infrastructure gets deployed on dev by running ```terraform apply -auto-approve -var-file vars/dev.tfvars``` and the production environment gets tested by running ```terraform plan -var-file vars/prod.tfvars```.
 
-- Once everything has been successfully tested and deployed on dev without any issue, it's time to move to prod. In this final stage, the command ```terraform apply -auto-approve -var-file vars/prod.tfvars``` will run to deploy inftrastructue to the production environment. 
+- Once everything has been successfully tested and deployed on dev without any issue, it's time to move to prod. This stage get trigger once the pull request is closed. The command ```terraform apply -auto-approve -var-file vars/prod.tfvars``` will run to deploy inftrastructue to the production environment.
